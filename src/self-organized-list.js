@@ -13,7 +13,17 @@ class SelfOrganizedList {
     }
 
     insert(data) {
-
+        var node = new Node(data);
+        
+        if(this.head == null && this.tail == null){
+            this.head = node;
+            this.tail = node;
+        }
+        else{
+            this.tail.next = node;
+            node.prev = this.tail;
+            this.tail = node;
+        }
     }
 
     size() {
