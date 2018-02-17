@@ -48,11 +48,24 @@ class SelfOrganizedList {
     }
 
     findNode(data) {
-
+        var curr = this.head;
+        while(curr.data != data){
+            curr = curr.next;
+        }
+        return curr;
     }
 
     toArray() {
-
+        var n = this.size();
+        var pos = 0;
+        var arr = new Array(n);
+        var curr = this.head;
+        while(pos < n){
+            arr[pos] = curr.data;
+            curr = curr.next;
+            pos++;
+        }
+        return arr;
     }
 
     removeAt(index) {
