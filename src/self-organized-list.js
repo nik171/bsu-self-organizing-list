@@ -45,7 +45,7 @@ class SelfOrganizedList {
         else{
             var curr = this.head;
             pos = 0;
-            while(pos < index){
+            while(pos != index){
                 curr = curr.next;
                 pos++;
             }
@@ -75,7 +75,30 @@ class SelfOrganizedList {
     }
 
     removeAt(index) {
-
+        if(index == 0){
+            if(this.head.next){
+                this.head = this.head.next;
+                this.head.prev = null;
+            }
+            else{
+                this.head = this.tail = null;
+            }
+            return;
+        }
+        if(count == this.size()){
+            this.tail = this.tail.prev;
+            this.tail.next = null;
+            return;
+        }
+        var curr = this.head;
+        var pos = 0;
+        while(pos != index){
+            curr = curr.next;
+            pos++;
+        }
+        curr.prev.next = curr.next;
+        curr.next.prev = curr.prev;
+        curr = null;
     }
 
     moveToFront(node) {
