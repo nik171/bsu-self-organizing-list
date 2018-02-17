@@ -15,19 +15,31 @@ class SelfOrganizedList {
     insert(data) {
         var node = new Node(data);
         
-        if(this.head == null && this.tail == null){
-            this.head = node;
-            this.tail = node;
-        }
-        else{
+        if(this.head != null){
             this.tail.next = node;
             node.prev = this.tail;
+            this.tail = node;
+            
+        }
+        else{
+            this.head = node;
             this.tail = node;
         }
     }
 
     size() {
-
+        var length = 0;
+        if(this.head == null){
+            return length;
+        }
+        else{
+            var curr = this.head;
+            while(curr != null){
+                curr = curr.next;
+                length++;
+            }
+        }
+        return length;
     }
 
     at(index) {
