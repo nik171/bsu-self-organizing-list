@@ -29,21 +29,22 @@ class SelfOrganizedList {
 
     size() {
         var length = 0;
-        if(this.head == null){
-            return length;
-        }
-        else{
-            var curr = this.head;
-            while(curr != null){
-                curr = curr.next;
-                length++;
-            }
+        var curr = this.head;
+        while(curr != null){
+            curr = curr.next;
+            length++;
         }
         return length;
     }
 
     at(index) {
-
+        var curr = this.head;
+        var pos = 0;
+        while(pos < index){
+            curr = curr.next;
+            pos++;
+        }
+        return curr.data;
     }
 
     findNode(data) {
