@@ -38,18 +38,24 @@ class SelfOrganizedList {
     }
 
     at(index) {
-        var curr = this.head;
-        var pos = 0;
-        while(pos < index){
-            curr = curr.next;
-            pos++;
+        var pos = this.size();
+        if(head == null || index < 0 || index > size - 1){
+            return null;
+        }
+        else{
+            var curr = this.head;
+            pos = 0;
+            while(pos < index){
+                curr = curr.next;
+                pos++;
+            }
         }
         return curr.data;
     }
 
     findNode(data) {
         var curr = this.head;
-        while(curr.data != data){
+        while(curr.data != data && curr != null){
             curr = curr.next;
         }
         return curr;
