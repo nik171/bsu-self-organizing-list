@@ -75,6 +75,9 @@ class SelfOrganizedList {
     }
 
     removeAt(index) {
+        if(index < 0 || index > this.size() - 1){
+            return;
+        }
         if(index == 0){
             if(this.head.next){
                 this.head = this.head.next;
@@ -85,7 +88,7 @@ class SelfOrganizedList {
             }
             return;
         }
-        if(index == this.size()){
+        if(index == this.size() - 1){
             this.tail = this.tail.prev;
             this.tail.next = null;
             return;
@@ -131,6 +134,30 @@ class SelfOrganizedList {
 
     reorganize(data) {
         var curr = this.head;
+        while(curr.data != data && curr != null){
+            curr = curr.next;
+        }
+        if(curr == null){
+            return false;
+        }
+        if(curr == this.tail && this.size() > 1){
+            this.tail = this.tail.prev;
+            this.tail.next = null;
+            this.head.prev = curr;
+            curr.next = this.head;
+            this.head = curr;
+            return true;
+        }
+        else if(curr != this.head && curr != this.tail && this.size > 1){
+            var temp = curr;
+            temp.prev.next = temp.next;
+            temp.next.prev = temp.prev;
+            this.head.prev = curr;
+            curr.next = this.head;
+            this.head = curr;
+            return true;
+        }
+        return true;
     }
 
 }
