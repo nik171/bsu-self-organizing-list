@@ -39,7 +39,7 @@ class SelfOrganizedList {
 
     at(index) {
         var pos = this.size();
-        if(head == null || index < 0 || index > size - 1){
+        if(this.head == null || index < 0 || index > this.size() - 1){
             return null;
         }
         else{
@@ -55,8 +55,13 @@ class SelfOrganizedList {
 
     findNode(data) {
         var curr = this.head;
-        while(curr.data != data && curr != null){
-            curr = curr.next;
+        while(curr.data != data){
+			if(curr.next == null){
+				return null;
+			}
+			else{
+				curr = curr.next;
+			}
         }
         return curr;
     }
@@ -120,10 +125,9 @@ class SelfOrganizedList {
             this.head = curr;
             return;
         }
-        else if(curr != this.head && curr != this.tail && this.size > 1){
-            var temp = curr;
-            temp.prev.next = temp.next;
-            temp.next.prev = temp.prev;
+        else if(curr != this.head && curr != this.tail && this.size() > 1){
+            curr.prev.next = curr.next;
+            curr.next.prev = curr.prev;
             this.head.prev = curr;
             curr.next = this.head;
             this.head = curr;
@@ -134,12 +138,28 @@ class SelfOrganizedList {
 
     reorganize(data) {
         var curr = this.head;
-        while(curr.data != data && curr != null){
-            curr = curr.next;
+		if(curr == null){
+			return false;
+		}
+        if(this.head.next == null){
+			if(data == this.head.data){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		while(curr.data != data){
+			if(curr.next == null){
+				return false;
+			}
+			else{
+				curr = curr.next;
+			}
         }
-        if(curr == null){
-            return false;
-        }
+		if(curr == this.head){
+			return true;
+		}
         if(curr == this.tail && this.size() > 1){
             this.tail = this.tail.prev;
             this.tail.next = null;
@@ -148,7 +168,7 @@ class SelfOrganizedList {
             this.head = curr;
             return true;
         }
-        else if(curr != this.head && curr != this.tail && this.size > 1){
+        else if(curr != this.head && curr != this.tail && this.size() > 1){
             var temp = curr;
             temp.prev.next = temp.next;
             temp.next.prev = temp.prev;
@@ -157,7 +177,6 @@ class SelfOrganizedList {
             this.head = curr;
             return true;
         }
-        return true;
     }
 
 }
