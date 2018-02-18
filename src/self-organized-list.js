@@ -85,7 +85,7 @@ class SelfOrganizedList {
             }
             return;
         }
-        if(count == this.size()){
+        if(index == this.size()){
             this.tail = this.tail.prev;
             this.tail.next = null;
             return;
@@ -102,11 +102,35 @@ class SelfOrganizedList {
     }
 
     moveToFront(node) {
-
+        var curr = this.head;
+        while(curr != node && curr != null){
+            curr = curr.next;
+        }
+        if(curr == null){
+            return;
+        }
+        if(curr == this.tail && this.size() > 1){
+            this.tail = this.tail.prev;
+            this.tail.next = null;
+            this.head.prev = curr;
+            curr.next = this.head;
+            this.head = curr;
+            return;
+        }
+        else if(curr != this.head && curr != this.tail && this.size > 1){
+            var temp = curr;
+            temp.prev.next = temp.next;
+            temp.next.prev = temp.prev;
+            this.head.prev = curr;
+            curr.next = this.head;
+            this.head = curr;
+            return;
+        }
+        return;
     }
 
     reorganize(data) {
-
+        var curr = this.head;
     }
 
 }
